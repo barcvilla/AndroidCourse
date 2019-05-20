@@ -11,7 +11,8 @@
     
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
         <EditText
             android:id="@+id/username"
             android:hint="Username"
@@ -26,14 +27,26 @@
             android:id="@+id/password"
             android:hint="Password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/login"
         android:text="Log in"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:background="@drawable/botonstyle"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/register"
+        android:text="Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:background="@drawable/botonstyle"/>
 
 
 </LinearLayout>
