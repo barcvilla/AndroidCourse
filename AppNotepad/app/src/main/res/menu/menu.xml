@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/pricipal"
+            android:title="Principal"
+            android:icon="@drawable/ic_launcher_background"
+            android:checked="false">
+        </item>
+        <item
+            android:id="@+id/supermercado"
+            android:title="SuperMercado"
+            android:icon="@drawable/ic_launcher_background"
+            android:checked="false">
+        </item>
+        <item
+            android:id="@+id/pendientes"
+            android:title="Pendientes"
+            android:icon="@drawable/ic_launcher_background"
+            android:checked="false">
+        </item>
+        <item
+            android:id="@+id/vacaciones"
+            android:title="Vacaciones"
+            android:icon="@drawable/ic_launcher_background"
+            android:checked="false">
+        </item>
+    </group>
+</menu>

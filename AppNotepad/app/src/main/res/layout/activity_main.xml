@@ -11,13 +11,15 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        >
 
         <include android:id="@+id/toolbar" layout="@layout/toolbar" />
 
         <TextView
             android:text="Hola mundo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
     
@@ -25,8 +27,11 @@
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         app:headerLayout="@layout/header"
-        app:menu="">
+        app:menu="@menu/menu"
+        app:itemTextColor="@android:color/black"
+        app:itemIconTint="@android:color/black">
 
     </android.support.design.widget.NavigationView>
     
