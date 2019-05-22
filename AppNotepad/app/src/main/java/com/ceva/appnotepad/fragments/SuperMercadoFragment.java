@@ -10,13 +10,12 @@ import android.view.ViewGroup;
 
 import com.ceva.appnotepad.R;
 
-public class MainFragmentx extends Fragment {
-
+public class SuperMercadoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView;
-        rootView = inflater.inflate(R.layout.fragment_layout, container, false);
+        rootView = inflater.inflate(R.layout.supermercado_fragment, container, false);
 
         return rootView;
     }

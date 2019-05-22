@@ -35,7 +35,7 @@
             android:id="@+id/fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            class="com.ceva.appnotepad.fragments.MainFragmentx"
+            class="com.ceva.appnotepad.fragments.MainFragment"
             />
 
 </LinearLayout>
