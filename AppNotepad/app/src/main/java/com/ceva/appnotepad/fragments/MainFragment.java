@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ceva.appnotepad.R;
+import com.ceva.appnotepad.adapters.NotesAdapter;
 import com.ceva.appnotepad.domain.Note;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MainFragment extends Fragment {
     RecyclerView recyclerView;
     List<Note> noteList;
+    NotesAdapter adapter;
 
     @Nullable
     @Override
@@ -38,6 +40,8 @@ public class MainFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         initializedData();
+        adapter = new NotesAdapter(getActivity().getApplicationContext(), noteList);
+        recyclerView.setAdapter(adapter);
     }
 
     public void initializedData()
