@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+        setFragment(0);
     }
 
     public void setFragment(int pos)
