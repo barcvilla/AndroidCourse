@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c3c3c3"
+    tools:context=".MainActivity">
+
+    <!--Para pegar el fragment en el activity usamos el FrameLayout
+        Ver el ejemplo NoteApp donde se trata a profundidad los fragments
+        en nuestro caso incrustaremos el fragment de forma directa-->
+    <fragment
+        android:name="com.ceva.mod2persistenciafragments.MyFragment"
+        android:id="@+id/fragment"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+</LinearLayout>
