@@ -1,15 +1,20 @@
 package com.ceva.appnotepad.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.ceva.appnotepad.R;
 import com.ceva.appnotepad.adapters.NotesAdapter;
@@ -22,6 +27,7 @@ public class MainFragment extends Fragment {
     RecyclerView recyclerView;
     List<Note> noteList;
     NotesAdapter adapter;
+    FloatingActionButton fab;
 
     @Nullable
     @Override
@@ -42,6 +48,36 @@ public class MainFragment extends Fragment {
         initializedData();
         adapter = new NotesAdapter(getActivity().getApplicationContext(), noteList);
         recyclerView.setAdapter(adapter);
+
+        // activamos el floating action button
+        fab = (FloatingActionButton)view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                final EditText editText = new EditText(getActivity());
+                editText.setBackgroundColor(Color.GRAY);
+                alert.setMessage("Agregar un elemento");
+                alert.setMessage("Coloca el nombre");
+                alert.setView(editText);
+
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        noteList.add(new Note(noteList.size()+1, editText.getText().toString(), "Tarea pendiente"));
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alert.show();
+            }
+        });
     }
 
     public void initializedData()

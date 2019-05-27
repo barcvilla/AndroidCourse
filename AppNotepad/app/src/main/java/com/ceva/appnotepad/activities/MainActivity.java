@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
-    FloatingActionButton fab;
+    //FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = (NavigationView)findViewById(R.id.navigationView);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
-        fab = (FloatingActionButton)findViewById(R.id.fab);
+        //fab = (FloatingActionButton)findViewById(R.id.fab);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -120,12 +120,13 @@ public class MainActivity extends AppCompatActivity {
                 transaction.commit();
                 break;
         }
-
+        /**
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "FAB", Toast.LENGTH_SHORT).show();
             }
         });
+         **/
     }
 }
