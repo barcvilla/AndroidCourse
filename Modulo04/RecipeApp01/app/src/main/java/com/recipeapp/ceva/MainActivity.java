@@ -1,9 +1,12 @@
 package com.recipeapp.ceva;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.recipeapp.ceva.adapters.RecipeAdapter;
 import com.recipeapp.ceva.domain.Recipe;
@@ -16,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
     List<Recipe> recetas;
 
     RecipeAdapter recipeAdapter;
-
     DataBase dataBase;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         createDomainObjects();
 
         recyclerRecetas = (RecyclerView)findViewById(R.id.recyclerrecetas);
+        fab = (FloatingActionButton)findViewById(R.id.fab);
 
         /**
          * Configuracion del Componente RecyclerView:
@@ -45,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         recipeAdapter = new RecipeAdapter(MainActivity.this, recetas);
         // paso 7
         recyclerRecetas.setAdapter(recipeAdapter);
+
+        //add accion al FloatingActionButton
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void createDomainObjects()
