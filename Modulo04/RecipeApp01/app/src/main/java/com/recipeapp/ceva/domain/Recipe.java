@@ -1,5 +1,9 @@
 package com.recipeapp.ceva.domain;
 
+import android.content.ContentValues;
+
+import com.recipeapp.ceva.SQLConstants;
+
 public class Recipe
 {
     private String id;
@@ -74,5 +78,20 @@ public class Recipe
 
     public void setFavorito(int favorito) {
         this.favorito = favorito;
+    }
+
+    //Construimos el contenedor de valores
+    public ContentValues toValues()
+    {
+        ContentValues contentValues = new ContentValues(7); //colocamos el numero de atributos de la clase
+        contentValues.put(SQLConstants.COLUMN_ID, getId());
+        contentValues.put(SQLConstants.COLUMN_NOMBRE, getNombre());
+        contentValues.put(SQLConstants.COLUMN_PERSONAS, getPersonas());
+        contentValues.put(SQLConstants.COLUMN_DESCRIPCION, getDescripcion());
+        contentValues.put(SQLConstants.COLUMN_PREPARACION, getPreparacion());
+        contentValues.put(SQLConstants.COLUMN_IMAGE, getImage());
+        contentValues.put(SQLConstants.COLUMN_FAV, getFavorito());
+
+        return contentValues;
     }
 }

@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     RecipeAdapter recipeAdapter;
 
+    DataBase dataBase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void createDomainObjects()
     {
+
         recetas = new ArrayList<Recipe>();
         recetas.add(new Recipe(
                 "1",
@@ -113,5 +116,10 @@ public class MainActivity extends AppCompatActivity {
                         "Colocar los tomates en la licuadora",
                 "htt://imagen.png",
                 0));
+
+        dataBase = new DataBase(MainActivity.this);
+        dataBase.open();
+        dataBase.insertBulkRecipes(recetas);
+
     }
 }
