@@ -33,6 +33,10 @@ public class SQLConstants
                 COLUMN_FAV + " INT" +
             ");";
 
+    public static final String WHERE_CLAUSE_NOMBRE = "nombre=?";
+
     public static final String SQL_DROP_TABLE = "DROP TABLE " + TABLE_RECETAS;
 
+    public  static final String[] ALL_COLUMNS =
+            {COLUMN_ID, COLUMN_NOMBRE, COLUMN_PERSONAS, COLUMN_DESCRIPCION, COLUMN_PREPARACION, COLUMN_IMAGE, COLUMN_FAV};
 }

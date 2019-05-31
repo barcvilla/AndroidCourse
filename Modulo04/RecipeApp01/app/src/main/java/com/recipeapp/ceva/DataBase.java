@@ -2,6 +2,7 @@ package com.recipeapp.ceva;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.recipeapp.ceva.domain.Recipe;
 import com.recipeapp.ceva.helpers.DBHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,5 +69,31 @@ public class DataBase
                 insertRecipe(recipe);
             }
         }
+    }
+
+    public List<Recipe> getAllRecipe()
+    {
+        List<Recipe> recipes = new ArrayList<Recipe>();
+        Cursor cursor = sqLiteDatabase.query(SQLConstants.TABLE_RECETAS, SQLConstants.ALL_COLUMNS,
+                null, null, null, null, null);
+        while (cursor.moveToNext())
+        {
+            Recipe recipe = new Recipe();
+            recipe.setId(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_ID)));
+            recipe.setNombre(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_NOMBRE)));
+            recipe.setPersonas(cursor.getInt(cursor.getColumnIndex(SQLConstants.COLUMN_PERSONAS)));
+            recipe.setDescripcion(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_DESCRIPCION)));
+            recipe.setPreparacion(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_PREPARACION)));
+            recipe.setImage(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_IMAGE)));
+            recipe.setFavorito(cursor.getInt(cursor.getColumnIndex(SQLConstants.COLUMN_FAV)));
+            recipes.add(recipe);
+        }
+        return  recipes;
+    }
+
+    public void deleteRecipe(String nombre)
+    {
+        String[] whereArgs = new String[]{String.valueOf(nombre)};
+        sqLiteDatabase.delete(SQLConstants.TABLE_RECETAS, SQLConstants.WHERE_CLAUSE_NOMBRE, whereArgs);
     }
 }

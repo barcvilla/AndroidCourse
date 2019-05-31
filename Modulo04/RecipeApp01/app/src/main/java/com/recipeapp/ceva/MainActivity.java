@@ -1,11 +1,13 @@
 package com.recipeapp.ceva;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.recipeapp.ceva.adapters.RecipeAdapter;
@@ -45,10 +47,36 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerRecetas.setLayoutManager(linearLayoutManager);
-        // paso 6
-        recipeAdapter = new RecipeAdapter(MainActivity.this, recetas);
+        //El paso 6 y 7 son reemplazados por el metodo updateDataView
+        // paso 6 llenados de datos por el adaptador
+        //recipeAdapter = new RecipeAdapter(MainActivity.this, recetas);
         // paso 7
-        recyclerRecetas.setAdapter(recipeAdapter);
+        //recyclerRecetas.setAdapter(recipeAdapter);
+        updateDataView();
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                //Swipe es cuando con el dedo pasamos sobre la pantalla del telefono
+                int position = viewHolder.getAdapterPosition(); //obtenemos la posicion del elemento de la lista en el adapter
+                //obtenemos el adaptardor para poder manipularlo
+                RecipeAdapter recipeAdapter = (RecipeAdapter)recyclerRecetas.getAdapter();
+                String value = recipeAdapter.recetas.get(position).getNombre(); //obtemos el item receta del adapter
+                dataBase.deleteRecipe(value);
+                updateDataView();
+            }
+        };
+
+        /**
+         * Seleccionar un elemento para realizar una accion: eliminar
+         */
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerRecetas);
 
         //add accion al FloatingActionButton
         fab.setOnClickListener(new View.OnClickListener() {
@@ -134,5 +162,23 @@ public class MainActivity extends AppCompatActivity {
         dataBase.open();
         dataBase.insertBulkRecipes(recetas);
 
+    }
+
+    /**
+     * Metodo que dibuja las recetas recuperadas de la BD
+     */
+    public void updateDataView()
+    {
+        recipeAdapter = new RecipeAdapter(MainActivity.this, dataBase.getAllRecipe());
+        recyclerRecetas.setAdapter(recipeAdapter);
+    }
+
+    /**
+     * Metodo para actualizar la vista luego de insertar una nueva receta
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateDataView();
     }
 }

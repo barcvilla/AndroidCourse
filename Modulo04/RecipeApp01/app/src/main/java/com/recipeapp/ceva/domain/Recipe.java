@@ -14,6 +14,8 @@ public class Recipe
     private String image;
     private int favorito; // 1 == favorito / 0 == not favorito
 
+    public Recipe(){}
+
     public Recipe(String id, String nombre, int personas, String descripcion, String preparacion, String image, int favorito) {
         this.id = id;
         this.nombre = nombre;
@@ -23,6 +25,7 @@ public class Recipe
         this.image = image;
         this.favorito = favorito;
     }
+
 
     public String getId() {
         return id;
