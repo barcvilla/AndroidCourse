@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.recipeapp.ceva.SQLConstants;
 
 /**
- * Clase que nos ayuda a trabajar con las conexiones
+ * Clase que nos ayuda crear la BD
  */
 public class DBHelper extends SQLiteOpenHelper
 {

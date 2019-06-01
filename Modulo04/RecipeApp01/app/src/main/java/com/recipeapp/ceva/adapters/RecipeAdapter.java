@@ -29,12 +29,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     /**
      * Paso 1. Definir un layout que sera una vista de nuestros objetos de dominio. El layout lo definimos en la carpeta res -> layout
-     * Paso 2. Definimos la vista es decir un ViewHolder
+     * Paso 2. Definimos la vista es decir un ViewHolder. El cual contendra los elementos que conforman una receta
      */
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         private CardView cardView;
-        private ImageView imageView;
+        private ImageView imageView, star;
         private TextView nombre, personas, descripcion, preparacion;
 
         public ViewHolder(@NonNull View itemView) {
@@ -45,6 +45,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             personas = (TextView)itemView.findViewById(R.id.personas);
             descripcion = (TextView)itemView.findViewById(R.id.descripcion);
             preparacion = (TextView)itemView.findViewById(R.id.preparacion);
+            star = (ImageView)itemView.findViewById(R.id.star);
         }
     }
 
@@ -59,12 +60,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return viewHolder;
     }
 
+    /**
+     * Metodo donde se construye el card con una receta
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.nombre.setText(recetas.get(i).getNombre());
         viewHolder.personas.setText("#Personas: " + String.valueOf(recetas.get(i).getPersonas()));
         viewHolder.descripcion.setText(recetas.get(i).getDescripcion());
         viewHolder.preparacion.setText(recetas.get(i).getPreparacion());
+        // si la receta es favorita mostramos la estrella amarilla de lo contrario la dejamos con la estrelle negra
+        if(recetas.get(i).getFavorito() == 1)
+        {
+            viewHolder.star.setImageResource(R.drawable.yellowstar);
+        }
+        else
+        {
+            viewHolder.star.setImageResource(R.drawable.blackstar);
+        }
     }
 
     @Override
