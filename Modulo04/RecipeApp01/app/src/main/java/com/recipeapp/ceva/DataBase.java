@@ -91,6 +91,32 @@ public class DataBase
         return  recipes;
     }
 
+    /**
+     * Traemos todas las recetas cuyo favorito = 1
+     */
+    public List<Recipe> getRecipeFavs()
+    {
+        List<Recipe> recipeFavs = new ArrayList<Recipe>();
+        String[] whereArgs = new String[] {String.valueOf(1)};
+        Cursor cursor = sqLiteDatabase.query(SQLConstants.TABLE_RECETAS, SQLConstants.ALL_COLUMNS,
+                SQLConstants.WHERE_CLAUSE_FAV, whereArgs, null, null, null);
+
+        while (cursor.moveToNext())
+        {
+            Recipe recipe = new Recipe();
+            recipe.setId(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_ID)));
+            recipe.setNombre(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_NOMBRE)));
+            recipe.setPersonas(cursor.getInt(cursor.getColumnIndex(SQLConstants.COLUMN_PERSONAS)));
+            recipe.setDescripcion(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_DESCRIPCION)));
+            recipe.setPreparacion(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_PREPARACION)));
+            recipe.setImage(cursor.getString(cursor.getColumnIndex(SQLConstants.COLUMN_IMAGE)));
+            recipe.setFavorito(cursor.getInt(cursor.getColumnIndex(SQLConstants.COLUMN_FAV)));
+            recipeFavs.add(recipe);
+        }
+        return recipeFavs;
+
+    }
+
     public void deleteRecipe(String nombre)
     {
         String[] whereArgs = new String[]{String.valueOf(nombre)};

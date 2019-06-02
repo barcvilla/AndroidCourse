@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.recipeapp.ceva.adapters.RecipeAdapter;
 import com.recipeapp.ceva.domain.Recipe;
@@ -180,5 +184,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateDataView();
+    }
+
+    /**
+     * Construccion del menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    /**
+     * Definimos las acciones por cada elemento del menu
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.favs:
+                //Toast.makeText(MainActivity.this,"Favs", Toast.LENGTH_LONG).show();
+                // le pasamos la lista con las recetas favoritas
+                recipeAdapter = new RecipeAdapter(MainActivity.this, dataBase.getRecipeFavs());
+                recyclerRecetas.setAdapter(recipeAdapter);
+                return true;
+            case R.id.personas:
+                Toast.makeText(MainActivity.this,"Personas", Toast.LENGTH_LONG).show();
+                return true;
+            default:
+               return super.onOptionsItemSelected(item);
+        }
     }
 }
