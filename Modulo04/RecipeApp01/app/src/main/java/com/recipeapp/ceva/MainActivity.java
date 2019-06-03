@@ -210,7 +210,9 @@ public class MainActivity extends AppCompatActivity {
                 recyclerRecetas.setAdapter(recipeAdapter);
                 return true;
             case R.id.personas:
-                Toast.makeText(MainActivity.this,"Personas", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this,"Personas", Toast.LENGTH_LONG).show();
+                recipeAdapter = new RecipeAdapter(MainActivity.this, dataBase.getRecipeByPersonas(4));
+                recyclerRecetas.setAdapter(recipeAdapter);
                 return true;
             default:
                return super.onOptionsItemSelected(item);
